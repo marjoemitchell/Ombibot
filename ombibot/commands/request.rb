@@ -21,7 +21,7 @@ module OmbiBot
         build_message = -> {
           {
             channel: data.channel,
-            text: "Showing first #{[3, body.size].min} of #{body.size} results for \"#{match["expression"]}\":",
+            text: "Some shit I found #{[3, body.size].min} of #{body.size} results for \"#{match["expression"]}\":",
             fallback: "use a full-featured slack client to use OmbiBot",
             attachments: body.first(3).map do |movie|
               {
