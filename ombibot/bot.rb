@@ -4,7 +4,7 @@ module OmbiBot
   class Bot < SlackRubyBot::Bot
     help do
       title "Bot for Ombi"
-      desc "Im the captain of this pirate shit my dude!"
+      desc "Im the captain of this pirate ship!"
     end
   end
 end

@@ -1,4 +1,4 @@
-FROM ruby:2.3.0
+FROM ruby:2.5.0
 # Update and install all of the required packages.
 # At the end, remove the apk cache
 RUN mkdir /usr/app
