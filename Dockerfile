@@ -1,11 +1,29 @@
-FROM ruby:2.5.0
-# Update and install all of the required packages.
-# At the end, remove the apk cache
-RUN mkdir /usr/app
-WORKDIR /usr/app
-COPY Gemfile /usr/app/
-COPY Gemfile.lock /usr/app/
-RUN gem install bundler
-RUN bundle install
-COPY . /usr/app
+FROM ruby:3.2-slim
+
+WORKDIR /app
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    git \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy Gemfile and Gemfile.lock
+COPY Gemfile Gemfile.lock ./
+
+# Install gems
+RUN gem install bundler && bundle install
+
+# Copy application code
+COPY . .
+
+# Set permissions for Unraid's 'nobody' user (100:99)
+RUN chown -R nobody:nogroup /app
+
+USER nobody
+
+# Expose default port
+EXPOSE 3000
+
+# Start the application
 CMD ["bundle", "exec", "foreman", "start"]

@@ -63,6 +63,67 @@ Command Structure:
 
 You can also send DMs to the bot, for your more embarassing requests. The DMs don't require the trigger word.
 
+## Docker Setup
+
+### Quick Start with Docker
+
+```bash
+# Build the image
+docker build -t ombibot:latest .
+
+# Run the container (set environment variables)
+docker run -d \
+  --name ombibot \
+  -e SLACK_API_TOKEN=xoxb-your-token \
+  -e OMBI_URL=http://ombi:5000 \
+  -e OMBI_API_KEY=your-api-key \
+  -e PLEX_URL=http://plex:32400 \
+  -e PLEX_TOKEN=your-plex-token \
+  -p 3000:3000 \
+  ombibot:latest
+```
+
+### Docker Hub
+
+The image is available on Docker Hub:
+
+```bash
+docker pull marjoemitchell/ombibot:latest
+docker run -d \
+  --name ombibot \
+  -e SLACK_API_TOKEN=xoxb-your-token \
+  -e OMBI_URL=http://ombi:5000 \
+  -e OMBI_API_KEY=your-api-key \
+  -p 3000:3000 \
+  marjoemitchell/ombibot:latest
+```
+
+### Unraid Installation
+
+1. In Unraid, go to **Community Applications**
+2. Search for **OmbiBot**
+3. Click install and configure the environment variables
+4. Click apply
+
+**Required Settings:**
+- `SLACK_API_TOKEN` - Your Slack bot OAuth token from https://api.slack.com/apps
+- `OMBI_URL` - URL to your Ombi instance (e.g., `http://ombi:5000`)
+- `OMBI_API_KEY` - Your Ombi API key from Ombi settings
+- `PLEX_URL` - URL to your Plex server (e.g., `http://plex:32400`)
+- `PLEX_TOKEN` - Your Plex API token
+
+### Environment Variables
+
+See `.env.example` for all configuration options:
+
+```bash
+cp .env.example .env
+# Edit .env with your settings
+```
+
 ## Built With:
 
-[Slack Ruby Bot](https://github.com/dblock/slack-ruby-bot)
+- [Slack Ruby Bot](https://github.com/dblock/slack-ruby-bot)
+- [Sinatra](https://sinatrarb.com/) - Web framework
+- [HTTParty](https://github.com/jnunemaker/httparty) - HTTP client
+- Ruby 3.2+
