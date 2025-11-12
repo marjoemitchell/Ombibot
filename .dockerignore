@@ -1,0 +1,10 @@
+vendor/bundle/
+.git/
+.env
+node_modules/
+logs/
+*.log
+.DS_Store
+.bundle/
+.idea/
+.vscode/
