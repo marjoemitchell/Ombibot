@@ -31,6 +31,11 @@
   </Networking>
   <Environment>
     <Variable>
+      <Name>PORT</Name>
+      <Value>3000</Value>
+      <Mode></Mode>
+    </Variable>
+    <Variable>
       <Name>TZ</Name>
       <Value>America/Chicago</Value>
       <Mode></Mode>

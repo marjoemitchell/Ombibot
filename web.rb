@@ -2,12 +2,14 @@ require "sinatra/base"
 require "uri"
 require "httparty"
 
+PORT = ENV["PORT"] || 3000
 OMBI_URL = ENV["OMBI_URL"]
 OMBI_API_KEY = ENV["OMBI_API_KEY"]
 OMBI_USER=ENV["OMBI_USER"]
 
 module OmbiBot
   class Web < Sinatra::Base
+    set :port, PORT
     get "/" do
       "Math is good for you."
     end

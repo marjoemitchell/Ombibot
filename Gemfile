@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'slack-ruby-bot'
+gem 'slack-ruby-client', '< 3.0'
 gem 'puma'
 gem 'sinatra'
 gem 'dotenv'
