@@ -1,7 +1,7 @@
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 
 require "dotenv"
-Dotenv.load
+Dotenv.load if File.exist?(".env")
 
 require "ombibot"
 require "web"

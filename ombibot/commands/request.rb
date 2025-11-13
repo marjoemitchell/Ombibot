@@ -1,9 +1,6 @@
 require "httparty"
 require "uri"
 
-OMBI_API_KEY = ENV["OMBI_API_KEY"]
-OMBI_URL = ENV["OMBI_URL"]
-
 module OmbiBot
   module Commands
     class Request < SlackRubyBot::Commands::Base
