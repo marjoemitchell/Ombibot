@@ -14,14 +14,20 @@ require "web"
 
 Thread.abort_on_exception = true
 
-Thread.new do
-  begin
-    OmbiBot::Bot.run
-  rescue Exception => e
-    STDERR.puts "ERROR: #{e}"
-    STDERR.puts e.backtrace
-    raise e
+# Only start the bot if SLACK_API_TOKEN is set
+if ENV["SLACK_API_TOKEN"] && !ENV["SLACK_API_TOKEN"].empty?
+  Thread.new do
+    begin
+      OmbiBot::Bot.run
+    rescue Exception => e
+      STDERR.puts "ERROR: #{e}"
+      STDERR.puts e.backtrace
+      raise e
+    end
   end
+else
+  puts "WARNING: SLACK_API_TOKEN not set. Slack bot will not run, but web server will be available."
+  puts "Set SLACK_API_TOKEN environment variable to enable the bot."
 end
 
 run OmbiBot::Web
