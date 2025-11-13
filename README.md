@@ -109,8 +109,32 @@ docker run -d \
 - `SLACK_API_TOKEN` - Your Slack bot OAuth token from https://api.slack.com/apps
 - `OMBI_URL` - URL to your Ombi instance (e.g., `http://ombi:5000`)
 - `OMBI_API_KEY` - Your Ombi API key from Ombi settings
+
+**Optional Settings:**
+- `PORT` - Port for the bot to listen on (default: 3000)
+- `TZ` - Timezone (default: America/Chicago)
 - `PLEX_URL` - URL to your Plex server (e.g., `http://plex:32400`)
 - `PLEX_TOKEN` - Your Plex API token
+- `OMBI_USER` - Ombi username (if needed)
+- `RACK_ENV` - Environment (default: production)
+
+**Configuration Methods:**
+
+You can configure OmbiBot in two ways:
+
+**Method 1: Environment Variables (Recommended)**
+Set the environment variables directly in the Unraid container settings. This is the recommended approach.
+
+**Method 2: .env File Mount (Optional)**
+Alternatively, you can create a `.env` file on your Unraid server and mount it to the container:
+1. Create `.env` file at `/mnt/user/appdata/ombibot/.env` (or your preferred location)
+2. Copy values from the `.env.example` file in this repo
+3. In the OmbiBot container settings, add a volume mount:
+   - Host Path: `/mnt/user/appdata/ombibot/.env`
+   - Container Path: `/app/.env`
+   - Mode: Read-only
+
+**⚠️ Security Note:** Never commit your `.env` file to version control. Keep your API tokens and secrets secure.
 
 ### Environment Variables
 

@@ -9,7 +9,7 @@
   <Project>https://github.com/marjoemitchell/Ombibot</Project>
   <Overview>A Slack bot for Ombi request management</Overview>
   <Category>Automation</Category>
-  <WebUI>http://[IP]:[PORT:3000]/</WebUI>
+  <WebUI>http://[IP]:[PORT:3000]/ (or use the PORT environment variable if changed)</WebUI>
   <TemplateURL>https://raw.githubusercontent.com/marjoemitchell/Ombibot/master/.unraid/template.xml</TemplateURL>
   <Icon>https://raw.githubusercontent.com/marjoemitchell/Ombibot/master/ombibot.gif</Icon>
   <ExtraParams></ExtraParams>
@@ -18,7 +18,12 @@
   <DateInstalled></DateInstalled>
   <DonateText></DonateText>
   <DonateLink></DonateLink>
-  <Description>OmbiBot is a Slack bot that integrates with Ombi for media request management. Users can search and request movies via Slack commands. The bot connects to your Ombi instance and Plex media server to enable easy media discovery and requests directly from Slack.</Description>
+  <Description>OmbiBot is a Slack bot that integrates with Ombi for media request management. Users can search and request movies via Slack commands. The bot connects to your Ombi instance and Plex media server to enable easy media discovery and requests directly from Slack.
+
+PORT CONFIGURATION: The default port is 3000. To use a different port:
+1. Edit the PORT environment variable (default: 3000)
+2. Edit the Container Port mapping below to match the PORT value
+3. Set the Host Port to the port you want to expose on your Unraid server</Description>
   <Networking>
     <Mode>bridge</Mode>
     <Publish>
@@ -31,44 +36,46 @@
   </Networking>
   <Environment>
     <Variable>
-      <Name>PORT</Name>
-      <Value>3000</Value>
-      <Mode></Mode>
-    </Variable>
-    <Variable>
-      <Name>TZ</Name>
-      <Value>America/Chicago</Value>
-      <Mode></Mode>
-    </Variable>
-    <Variable>
       <Name>SLACK_API_TOKEN</Name>
       <Value></Value>
       <Mode></Mode>
-      <Description>Required: Your Slack Bot API Token (xoxb-...)</Description>
+      <Description>REQUIRED: Your Slack Bot API Token (starts with xoxb-). Get it from https://api.slack.com/apps</Description>
     </Variable>
     <Variable>
       <Name>OMBI_URL</Name>
       <Value>http://ombi:5000</Value>
       <Mode></Mode>
-      <Description>URL to your Ombi instance (e.g., http://ombi:5000 or http://192.168.1.100:5000)</Description>
+      <Description>REQUIRED: URL to your Ombi instance (e.g., http://ombi:5000 or http://192.168.1.100:5000)</Description>
     </Variable>
     <Variable>
       <Name>OMBI_API_KEY</Name>
       <Value></Value>
       <Mode></Mode>
-      <Description>Required: Your Ombi API Key</Description>
+      <Description>REQUIRED: Your Ombi API Key (get from Ombi settings)</Description>
+    </Variable>
+    <Variable>
+      <Name>PORT</Name>
+      <Value>3000</Value>
+      <Mode></Mode>
+      <Description>Port for the bot to listen on (default 3000, must match container port below)</Description>
+    </Variable>
+    <Variable>
+      <Name>TZ</Name>
+      <Value>America/Chicago</Value>
+      <Mode></Mode>
+      <Description>Timezone (e.g., America/Chicago, America/Denver, America/Los_Angeles)</Description>
     </Variable>
     <Variable>
       <Name>OMBI_USER</Name>
       <Value></Value>
       <Mode></Mode>
-      <Description>Optional: Ombi username (if API key is user-specific)</Description>
+      <Description>Optional: Ombi username (if needed for API calls)</Description>
     </Variable>
     <Variable>
       <Name>PLEX_URL</Name>
       <Value>http://plex:32400</Value>
       <Mode></Mode>
-      <Description>URL to your Plex Media Server</Description>
+      <Description>Optional: URL to your Plex Media Server</Description>
     </Variable>
     <Variable>
       <Name>PLEX_TOKEN</Name>
@@ -80,9 +87,15 @@
       <Name>RACK_ENV</Name>
       <Value>production</Value>
       <Mode></Mode>
-      <Description>Environment: production or development</Description>
+      <Description>Environment (production or development)</Description>
     </Variable>
   </Environment>
-  <Volumes></Volumes>
+  <Volumes>
+    <Volume>
+      <HostPath></HostPath>
+      <ContainerPath>/app/.env</ContainerPath>
+      <Mode>ro</Mode>
+    </Volume>
+  </Volumes>
   <Labels></Labels>
 </Container>
