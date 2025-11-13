@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Container version="2">
   <Name>OmbiBot</Name>
-  <Repository>marjoemitchell/ombibot</Repository>
+  <Repository>thegorgotron83/ombibot</Repository>
   <Registry>https://hub.docker.com</Registry>
   <Network>bridge</Network>
   <Privileged>false</Privileged>
