@@ -44,31 +44,43 @@
       <Name>SLACK_API_TOKEN</Name>
       <Value></Value>
       <Mode></Mode>
+      <Description>Required: Your Slack Bot API Token (xoxb-...)</Description>
     </Variable>
     <Variable>
       <Name>OMBI_URL</Name>
       <Value>http://ombi:5000</Value>
       <Mode></Mode>
+      <Description>URL to your Ombi instance (e.g., http://ombi:5000 or http://192.168.1.100:5000)</Description>
     </Variable>
     <Variable>
       <Name>OMBI_API_KEY</Name>
       <Value></Value>
       <Mode></Mode>
+      <Description>Required: Your Ombi API Key</Description>
+    </Variable>
+    <Variable>
+      <Name>OMBI_USER</Name>
+      <Value></Value>
+      <Mode></Mode>
+      <Description>Optional: Ombi username (if API key is user-specific)</Description>
     </Variable>
     <Variable>
       <Name>PLEX_URL</Name>
       <Value>http://plex:32400</Value>
       <Mode></Mode>
+      <Description>URL to your Plex Media Server</Description>
     </Variable>
     <Variable>
       <Name>PLEX_TOKEN</Name>
       <Value></Value>
       <Mode></Mode>
+      <Description>Optional: Your Plex API Token</Description>
     </Variable>
     <Variable>
       <Name>RACK_ENV</Name>
       <Value>production</Value>
       <Mode></Mode>
+      <Description>Environment: production or development</Description>
     </Variable>
   </Environment>
   <Volumes></Volumes>
