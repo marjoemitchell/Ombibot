@@ -11,7 +11,7 @@
   <Category>Automation</Category>
   <WebUI>http://[IP]:[PORT:3000]/ (or use the PORT environment variable if changed)</WebUI>
   <TemplateURL>https://raw.githubusercontent.com/marjoemitchell/Ombibot/master/.unraid/template.xml</TemplateURL>
-  <Icon>https://raw.githubusercontent.com/marjoemitchell/Ombibot/master/ombibot.gif</Icon>
+  <Icon>https://raw.githubusercontent.com/marjoemitchell/Ombibot/master/ombibot.jpeg</Icon>
   <ExtraParams></ExtraParams>
   <PostArgs></PostArgs>
   <CPUset></CPUset>
