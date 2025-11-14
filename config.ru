@@ -1,7 +1,16 @@
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 
 require "dotenv"
-Dotenv.load if File.exist?(".env")
+
+# Try to load .env file if it exists
+env_file = File.join(__dir__, ".env")
+if File.exist?(env_file)
+  puts "Loading .env from #{env_file}"
+  Dotenv.load(env_file)
+else
+  puts "Note: .env file not found at #{env_file}"
+  puts "Using environment variables from Docker/system"
+end
 
 # Debug: Print environment on startup
 puts "=== OmbiBot Container Startup Debug ==="
