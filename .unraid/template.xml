@@ -22,7 +22,7 @@
   <Environment>
     <Variable>
       <Name>SLACK_API_TOKEN</Name>
-      <Value>REQUIRED</Value>
+      <Value></Value>
       <Mode></Mode>
     </Variable>
     <Variable>
@@ -32,7 +32,7 @@
     </Variable>
     <Variable>
       <Name>OMBI_API_KEY</Name>
-      <Value>REQUIRED</Value>
+      <Value></Value>
       <Mode></Mode>
     </Variable>
     <Variable>
@@ -52,7 +52,7 @@
     </Variable>
     <Variable>
       <Name>PLEX_TOKEN</Name>
-      <Value>REQUIRED</Value>
+      <Value></Value>
       <Mode></Mode>
     </Variable>
   </Environment>
