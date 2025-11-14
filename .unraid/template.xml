@@ -37,21 +37,21 @@ PORT CONFIGURATION: The default port is 3000. To use a different port:
   <Environment>
     <Variable>
       <Name>SLACK_API_TOKEN</Name>
-      <Value></Value>
+      <Value>REQUIRED</Value>
       <Mode></Mode>
-      <Description>REQUIRED: Your Slack Bot API Token (starts with xoxb-). Get it from https://api.slack.com/apps</Description>
+      <Description>REQUIRED: Your Slack Bot API Token (starts with xoxb-) — replace the placeholder with your token</Description>
     </Variable>
     <Variable>
       <Name>OMBI_URL</Name>
-      <Value>http://ombi:5000</Value>
+      <Value>http://YOUR_OMBI_HOST:5000</Value>
       <Mode></Mode>
       <Description>REQUIRED: URL to your Ombi instance (e.g., http://ombi:5000 or http://192.168.1.100:5000)</Description>
     </Variable>
     <Variable>
       <Name>OMBI_API_KEY</Name>
-      <Value></Value>
+      <Value>REQUIRED</Value>
       <Mode></Mode>
-      <Description>REQUIRED: Your Ombi API Key (get from Ombi settings)</Description>
+      <Description>REQUIRED: Your Ombi API Key (get from Ombi settings) — replace the placeholder</Description>
     </Variable>
     <Variable>
       <Name>PORT</Name>
