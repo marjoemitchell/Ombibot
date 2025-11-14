@@ -9,7 +9,7 @@
   <Project>https://github.com/marjoemitchell/Ombibot</Project>
   <Overview>A Slack bot for Ombi request management</Overview>
   <Category>Automation</Category>
-  <WebUI>http://[IP]:[PORT:8080</WebUI>
+  <WebUI>http://[IP]:[PORT:PORT]</WebUI>
   <TemplateURL>https://raw.githubusercontent.com/marjoemitchell/Ombibot/master/.unraid/template.xml</TemplateURL>
   <Icon>https://raw.githubusercontent.com/marjoemitchell/Ombibot/master/ombibot.jpeg</Icon>
   <ExtraParams></ExtraParams>
@@ -20,26 +20,24 @@
   <DonateLink></DonateLink>
   <Description>OmbiBot is a Slack bot that integrates with Ombi for media request management. Users can search and request movies via Slack commands.</Description>
   <Environment>
+    <Variable>
       <Name>SLACK_API_TOKEN</Name>
-      <Value>SLACK_API_TOKEN</Value>
-      <REQUIRED>true</REQUIRED>
+      <Value>REQUIRED</Value>
       <Mode></Mode>
     </Variable>
     <Variable>
       <Name>OMBI_URL</Name>
-      <Value>OMBI_URL</Value>
-      <REQUIRED>true</REQUIRED>
+      <Value>http://192.168.1.5:3579</Value>
       <Mode></Mode>
     </Variable>
     <Variable>
       <Name>OMBI_API_KEY</Name>
-      <Value>OMBI_API_KEY</Value>
-      <REQUIRED>true</REQUIRED>
+      <Value>REQUIRED</Value>
       <Mode></Mode>
     </Variable>
+    <Variable>
       <Name>PORT</Name>
-      <Value>PORT</Value>
-      <REQUIRED>true</REQUIRED>
+      <Value>3000</Value>
       <Mode></Mode>
     </Variable>
     <Variable>
@@ -50,13 +48,11 @@
     <Variable>
       <Name>PLEX_URL</Name>
       <Value>http://plex:32400</Value>
-      <REQUIRED>true</REQUIRED>
       <Mode></Mode>
     </Variable>
     <Variable>
       <Name>PLEX_TOKEN</Name>
-      <Value>PLEX_TOKENValue>
-      <REQUIRED>true</REQUIRED>
+      <Value>REQUIRED</Value>
       <Mode></Mode>
     </Variable>
   </Environment>
@@ -64,8 +60,8 @@
     <Mode>bridge</Mode>
     <Publish>
       <Port>
-        <HostPort>4567</HostPort>
-        <ContainerPort>4567</ContainerPort>
+        <HostPort>3000</HostPort>
+        <ContainerPort>3000</ContainerPort>
         <Protocol>tcp</Protocol>
       </Port>
     </Publish>
