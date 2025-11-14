@@ -18,7 +18,7 @@ RUN gem install bundler && bundle install
 COPY . .
 
 # Set permissions for Unraid's 'nobody' user (100:99)
-RUN chown -R nobody:nogroup /app
+RUN chown -R nobody:users /app
 
 USER nobody
 
