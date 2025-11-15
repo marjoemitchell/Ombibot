@@ -10,7 +10,11 @@ OMBI_USER=ENV["OMBI_USER"]
 
 module OmbiBot
   class Web < Sinatra::Base
-    set :port, PORT
+  set :port, PORT
+  # bind to all interfaces so the container accepts requests from outside
+  set :bind, '0.0.0.0'
+  # print startup info for easier debugging in container logs
+  STDOUT.puts "Starting OmbiBot web server: bind=0.0.0.0 port=#{PORT}"
     get "/" do
       "Math is good for you."
     end
