@@ -1,11 +1,13 @@
 require "httparty"
 require "uri"
+require "json"
 
 module OmbiBot
   module Commands
     class Request < SlackRubyBot::Commands::Base
       command "download", "get", "request", "search", "find" do |client, data, match|
-        query = URI.escape(match["expression"])
+  # URI.escape is removed in newer Ruby versions; use encode_www_form_component
+  query = URI.encode_www_form_component(match["expression"].to_s)
         body = JSON.parse(HTTParty.get(
           "#{OMBI_URL}/api/v1/Search/movie/#{query}",
           {
