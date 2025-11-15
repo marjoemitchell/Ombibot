@@ -7,7 +7,7 @@ gem 'sinatra'
 gem 'dotenv'
 gem 'celluloid-io'
 gem 'httparty'
-gem 'async-websocket'
+gem 'async-websocket', '~> 0.8.0'
 
 group :development, :test do
   gem 'rake'
