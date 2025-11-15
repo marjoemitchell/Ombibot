@@ -1,0 +1,25 @@
+version: '3.7'
+
+services:
+  ombibot:
+    image: thegorgotron83/ombibot:latest
+    container_name: ombibot
+    env_file: .env
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./logs:/app/logs
+      # Add any additional host mounts you use in Unraid here
+
+  # Watchtower will periodically check Docker Hub for new image tags and update the running container.
+  # It is a simple way to provide automatic updates on a host without manual intervention.
+  watchtower:
+    image: containrrr/watchtower:latest
+    container_name: watchtower
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: --cleanup --interval 300 ombibot
+    # --cleanup : remove old images after update
+    # --interval 300 : check every 5 minutes
