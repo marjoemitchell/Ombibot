@@ -8,6 +8,7 @@ gem 'dotenv'
 gem 'celluloid-io'
 gem 'httparty'
 gem 'async-websocket', '~> 0.8.0'
+gem 'async', '~> 1.6'
 
 group :development, :test do
   gem 'rake'
