@@ -21,7 +21,16 @@ puts "========================================"
 require "ombibot"
 require "web"
 
-Thread.abort_on_exception = true
+Thread.abort_on_exception = false
+
+# Print versions of async gems (helpful for debugging runtime image)
+begin
+  require 'rubygems'
+  puts "async-websocket: #{Gem.loaded_specs['async-websocket'] && Gem.loaded_specs['async-websocket'].version}"
+  puts "async: #{Gem.loaded_specs['async'] && Gem.loaded_specs['async'].version}"
+rescue Exception
+  puts "Could not determine async gem versions"
+end
 
 # Only start the bot if SLACK_API_TOKEN is set
 if ENV["SLACK_API_TOKEN"] && !ENV["SLACK_API_TOKEN"].empty?
@@ -29,9 +38,10 @@ if ENV["SLACK_API_TOKEN"] && !ENV["SLACK_API_TOKEN"].empty?
     begin
       OmbiBot::Bot.run
     rescue Exception => e
-      STDERR.puts "ERROR: #{e}"
-      STDERR.puts e.backtrace
-      raise e
+      STDERR.puts "ERROR starting Slack real-time client: #{e.class} - #{e.message}"
+      STDERR.puts e.backtrace.join("\n")
+      STDERR.puts "The web server will continue to run. To fix Slack RT, ensure the image includes async-websocket ~> 0.8.0 and async ~> 1.x, or remove SLACK_API_TOKEN to disable the RT client."
+      # Do not re-raise here so Puma/web continues running even if the Slack thread fails
     end
   end
 else
