@@ -25,5 +25,7 @@ USER nobody
 # Expose default port
 EXPOSE 3000
 
-# Start the application
-CMD ["bundle", "exec", "foreman", "start"]
+# Start the application directly with Puma so container respects the PORT env variable.
+# Foreman injects its own PORT mappings (starting at 5000) which can conflict with Docker/Unraid.
+# Use a shell form so ${PORT:-3000} is expanded from the container environment.
+CMD ["sh", "-lc", "bundle exec puma -p ${PORT:-3000}"]
