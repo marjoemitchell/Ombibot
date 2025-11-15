@@ -7,15 +7,27 @@ module OmbiBot
     class Request < SlackRubyBot::Commands::Base
       command "download", "get", "request", "search", "find" do |client, data, match|
   # URI.escape is removed in newer Ruby versions; use encode_www_form_component
-  query = URI.encode_www_form_component(match["expression"].to_s)
-        body = JSON.parse(HTTParty.get(
-          "#{OMBI_URL}/api/v1/Search/movie/#{query}",
-          {
-            headers: {
-              "ApiKey" => OMBI_API_KEY,
-            },
-          }
-        ).body)
+        query = URI.encode_www_form_component(match["expression"].to_s)
+
+        # Call Ombi and handle non-JSON or error responses gracefully
+        resp = HTTParty.get("#{OMBI_URL}/api/v1/Search/movie/#{query}",
+                             headers: { "ApiKey" => OMBI_API_KEY })
+
+        if resp.code != 200
+          STDERR.puts "Ombi search HTTP error: #{resp.code} -> #{resp.body[0..500]}"
+          client.web_client.chat_postMessage(channel: data.channel,
+                                             text: "Ombi search failed (HTTP #{resp.code}). Check Ombi URL and API key.")
+          next
+        end
+
+        begin
+          body = JSON.parse(resp.body)
+        rescue JSON::ParserError => e
+          STDERR.puts "JSON parse error from Ombi search: #{e.message}; body=#{resp.body[0..500]}"
+          client.web_client.chat_postMessage(channel: data.channel,
+                                             text: "Ombi returned an unexpected response (not JSON). Check Ombi_URL and OMBI_API_KEY, and ensure Ombi is reachable.")
+          next
+        end
 
         build_message = -> {
           {
